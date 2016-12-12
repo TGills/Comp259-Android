@@ -1,5 +1,8 @@
 package com.guillaume2127.personnelapp;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+
 import java.util.Date;
 
 /*
@@ -34,7 +37,6 @@ public class Personnel extends MainActivity{
         setAge(Age);
         setMarried(Married);
     }
-
     public int getPersonnelID() {
         return PersonnelID;
     }

@@ -11,45 +11,84 @@ import android.widget.TextView;
 import java.text.ParseException;
 import java.util.Date;
 import static java.lang.Boolean.TRUE;
+import static java.lang.Boolean.valueOf;
+
 public class MainActivity extends AppCompatActivity {
     Personnel personnel;
     String birthDate = "06-15-1994";
+
+    //Creating global variables for the textviews and whatnot
+     TextView PersonnelID;
+     TextView PictureID;
+     TextView Name;
+     TextView Address;
+     TextView Phone;
+     TextView Email;
+     TextView Position;
+     TextView supervisorName;
+     TextView Role;
+     TextView Birthdate;
+     TextView Age;
+     TextView Married;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MainActivity pd = new MainActivity();
         InitData();
-
-        final TextView PersonnelID = (TextView) findViewById(R.id.tvPersonnelID);
+        PersonnelID = (TextView) findViewById(R.id.tvPersonnelID);
+        PictureID = (TextView) findViewById(R.id.tvPictureID);
+        Name = (TextView) findViewById(R.id.tvName);
+        Address = (TextView) findViewById(R.id.tvAddress);
+        Phone = (TextView) findViewById(R.id.tvPhone);
+        Email = (TextView) findViewById(R.id.tvEmail);
+        Position = (TextView) findViewById(R.id.tvPosition);
+        supervisorName = (TextView) findViewById(R.id.tvSupervisorName);
+        Role = (TextView) findViewById(R.id.tvRole);
+        Birthdate = (TextView) findViewById(R.id.tvBirthdate);
+        Age = (TextView) findViewById(R.id.tvAge);
+        Married = (TextView) findViewById(R.id.tvMarried);
+        //PersonnelID
         PersonnelID.setText(String.valueOf(personnel.getPersonnelID()));
-        final TextView PictureID = (TextView) findViewById(R.id.tvPictureID);
+        //PictureID
         PictureID.setText(String.valueOf(personnel.getPictureID()));
-        final TextView Name = (TextView) findViewById(R.id.tvName);
+        //Name
         Name.setText(personnel.getName());
-        final TextView Address = (TextView) findViewById(R.id.tvAddress);
+        Name.addTextChangedListener(twName);
+        //Address
         Address.setText(personnel.getAddress());
-        final TextView Phone = (TextView) findViewById(R.id.tvPhone);
+        Address.addTextChangedListener(twAddress);
+        //Phone Number
         Phone.setText(personnel.getPhone());
-        final TextView Email = (TextView) findViewById(R.id.tvEmail);
+        Phone.addTextChangedListener(twPhone);
+        //Email address
         Email.setText(personnel.getEmail());
-        final TextView Position = (TextView) findViewById(R.id.tvPosition);
+        Email.addTextChangedListener(twEmail);
+        //Position
         Position.setText(personnel.getPosition());
-        final TextView supervisorName = (TextView) findViewById(R.id.tvSupervisorName);
+        Position.addTextChangedListener(twPosition);
+        //Supervisor Name
         supervisorName.setText(personnel.getSupervisorName());
-        final TextView Role = (TextView) findViewById(R.id.tvRole);
+        supervisorName.addTextChangedListener(twSupervisorName);
+        //Role
         Role.setText(personnel.getRole());
-        final TextView Birthdate = (TextView) findViewById(R.id.tvBirthdate);
+        Role.addTextChangedListener(twRole);
+        //Birth date
         Birthdate.setText(personnel.getBirthdate());
-        final TextView Age = (TextView) findViewById(R.id.tvAge);
+        Birthdate.addTextChangedListener(twBirthDate);
+        //Age
         Age.setText(String.valueOf(personnel.getAge()));
-        final TextView Married = (TextView) findViewById(R.id.tvMarried);
+        //Married
         if(personnel.getMarried() == TRUE){
             Married.setText("Yes");
         }
         else{
             Married.setText("No");
         }
+        //Image
         ImageView ivPictureProfile= (ImageView) findViewById(R.id.ivPictureProfile);
         ivPictureProfile.setImageResource(R.drawable.profilepicture);
 
@@ -80,9 +119,7 @@ public class MainActivity extends AppCompatActivity {
         return age;
     }
 
-
-
-    private TextWatcher textWatcher = new TextWatcher() {
+    private TextWatcher twName = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -93,13 +130,109 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void afterTextChanged(Editable editable) {
-
+            personnel.setName(String.valueOf(Name));
         }
     };
+    private TextWatcher twAddress = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setAddress(String.valueOf(Address));
+        }
+    };
+    private TextWatcher twPhone = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setPhone(String.valueOf(Phone));
+        }
+    };
+    private TextWatcher twEmail = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setEmail(String.valueOf(Email));
+        }
+    };
+    private TextWatcher twPosition = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setPosition(String.valueOf(Position));
+        }
+    };
+    private TextWatcher twSupervisorName = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setSupervisorName(String.valueOf(supervisorName));
+        }
+    };
+    private TextWatcher twRole = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setRole(String.valueOf(Role));
+        }
+    };
+    private TextWatcher twBirthDate = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            personnel.setBirthdate(String.valueOf(Birthdate));
+            Age();
+        }
+    };
 
 
 
