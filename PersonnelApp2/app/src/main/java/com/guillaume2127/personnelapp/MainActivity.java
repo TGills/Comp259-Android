@@ -15,7 +15,7 @@ import static java.lang.Boolean.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     Personnel personnel;
-    String birthDate = "06-15-1994";
+    String birthDate;
 
     //Creating global variables for the textviews and whatnot
      TextView PersonnelID;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MainActivity pd = new MainActivity();
+        //MainActivity pd = new MainActivity();
         InitData();
         PersonnelID = (TextView) findViewById(R.id.tvPersonnelID);
         PictureID = (TextView) findViewById(R.id.tvPictureID);
@@ -96,25 +96,29 @@ public class MainActivity extends AppCompatActivity {
     }
     public void InitData(){
         personnel = new Personnel(1234,223,"John Doe", "OverTheHedge, 111", "306-123-5555",
-                "jdoe@generic.ca", "Clerk", "Mr. Smith", "Staff", birthDate , Age(), TRUE);
+                "jdoe@generic.ca", "Clerk", "Mr. Smith", "Staff", "06-15-1994" , Age(birthDate), TRUE);
     }
-    public int Age(){
+    public int Age(String by){
         int age = 0;
-        try {
-            //Gathering the YEAR from a calendar that grabs the date right now
-            Calendar dateNow = Calendar.getInstance();
-            int year = dateNow.get(Calendar.YEAR);
-            //Converting the date into a calendar so that I may grab the year
-            Calendar bYear = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("DD-MM-yyyy");
-            Date sd = df.parse(birthDate);
-            bYear.setTime(sd);
-            int birthYear = bYear.get(Calendar.YEAR);
-            //Doing the calculation for age
-            age = year - birthYear;
+        if(birthDate == null){
+            age = 0;
         }
-        catch(ParseException e){
-            e.printStackTrace();
+        else {
+            try {
+                //Gathering the YEAR from a calendar that grabs the date right now
+                Calendar dateNow = Calendar.getInstance();
+                int year = dateNow.get(Calendar.YEAR);
+                //Converting the date into a calendar so that I may grab the year
+                Calendar bYear = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("DD-MM-yyyy");
+                Date sd = df.parse(by);
+                bYear.setTime(sd);
+                int birthYear = bYear.get(Calendar.YEAR);
+                //Doing the calculation for age
+                age = year - birthYear;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return age;
     }
@@ -224,13 +228,18 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            Age(birthDate);
+            InitData();
+            personnel.setBirthdate(String.valueOf(Birthdate));
         }
-
         @Override
         public void afterTextChanged(Editable editable) {
+            Age(birthDate);
+            InitData();
             personnel.setBirthdate(String.valueOf(Birthdate));
-            Age();
+            //Age();
+            //personnel.setBirthdate(String.valueOf(Birthdate));
+
         }
     };
 
