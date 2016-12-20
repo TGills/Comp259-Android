@@ -18,18 +18,18 @@ public class MainActivity extends AppCompatActivity {
     String birthDate;
 
     //Creating global variables for the textviews and whatnot
-     TextView PersonnelID;
-     TextView PictureID;
-     TextView Name;
-     TextView Address;
-     TextView Phone;
-     TextView Email;
-     TextView Position;
-     TextView supervisorName;
-     TextView Role;
-     TextView Birthdate;
-     TextView Age;
-     TextView Married;
+     TextView PersonnelID = (TextView) findViewById(R.id.tvPersonnelID);
+     TextView PictureID = (TextView) findViewById(R.id.tvPictureID);
+     TextView Name = (TextView) findViewById(R.id.tvName);
+     TextView Address = (TextView) findViewById(R.id.tvAddress);
+     TextView Phone = (TextView) findViewById(R.id.tvPhone);
+     TextView Email = (TextView) findViewById(R.id.tvEmail);
+     TextView Position = (TextView) findViewById(R.id.tvPosition);
+     TextView supervisorName = (TextView) findViewById(R.id.tvSupervisorName);
+     TextView Role = (TextView) findViewById(R.id.tvRole);
+     TextView Birthdate = (TextView) findViewById(R.id.tvBirthdate);;
+     TextView Age = (TextView) findViewById(R.id.tvAge);
+     TextView Married = (TextView) findViewById(R.id.tvMarried);
 
 
 
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //MainActivity pd = new MainActivity();
         InitData();
+        /*
         PersonnelID = (TextView) findViewById(R.id.tvPersonnelID);
         PictureID = (TextView) findViewById(R.id.tvPictureID);
         Name = (TextView) findViewById(R.id.tvName);
@@ -48,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         Position = (TextView) findViewById(R.id.tvPosition);
         supervisorName = (TextView) findViewById(R.id.tvSupervisorName);
         Role = (TextView) findViewById(R.id.tvRole);
-        Birthdate = (TextView) findViewById(R.id.tvBirthdate);
         Age = (TextView) findViewById(R.id.tvAge);
         Married = (TextView) findViewById(R.id.tvMarried);
+        */
         //PersonnelID
         PersonnelID.setText(String.valueOf(personnel.getPersonnelID()));
         //PictureID
@@ -242,10 +243,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
-
-
-
 
 
 }
