@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.util.Date;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Boolean.valueOf;
+import java.*;
 
 public class MainActivity extends AppCompatActivity {
     Personnel personnel;
@@ -99,10 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public int Age(String by){
         int age = 0;
-        if(Birthdate == null){
-            age = 9999;
-        }
-        else {
+        if(Birthdate != null){
             try {
                 //Gathering the YEAR from a calendar that grabs the date right now
                 Calendar dateNow = Calendar.getInstance();
@@ -119,10 +117,11 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        else {
+            age = 9999;
+        }
         return age;
     }
-
-
 
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -136,11 +135,18 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void afterTextChanged(Editable editable) {
-            //DO NOT CALL RECURCIVLY
-            //Use this one
-
-
-
+           //Use this one
+                PersonnelID.removeTextChangedListener(textWatcher);
+                PictureID.removeTextChangedListener(textWatcher);
+                Name.removeTextChangedListener(textWatcher);
+                Address.removeTextChangedListener(textWatcher);
+                Phone.removeTextChangedListener(textWatcher);
+                Email.removeTextChangedListener(textWatcher);
+                Position.removeTextChangedListener(textWatcher);
+                supervisorName.removeTextChangedListener(textWatcher);
+                Role.removeTextChangedListener(textWatcher);
+                Birthdate.removeTextChangedListener(textWatcher);
+                Married.removeTextChangedListener(textWatcher);
                 int PID = Integer.parseInt(PersonnelID.getText().toString());
                 int PicID = Integer.parseInt(PictureID.getText().toString());
                 String NAME = Name.getText().toString();
@@ -155,11 +161,10 @@ public class MainActivity extends AppCompatActivity {
 
                 personnel = new Personnel(PID, PicID, NAME, ADDRESS, PHONE, EMAIL, POSITION,
                         SNAME, ROLE, BDATE, Age(BDATE), MARRIED);
-
                 Output();
+
 
         }
     };
-
 
 }
