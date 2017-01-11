@@ -23,48 +23,56 @@ public class PurchaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Setting the view to purchase_layout.xml
         setContentView(R.layout.purchase_layout);
+    }
+
+    private void StartActivityForResult(){
         try {
-            StartActivityForResult();
-            onActivityResult();
+            //Defining the new intent
+            Intent intent = new Intent(this, LoanSummaryActivity.class);
+            //intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            //Gathering the value of the selected radio button
+            Integer radioId = loanTermRG.getCheckedRadioButtonId();
+            RadioButton term = (RadioButton) findViewById(radioId);
+            String termLength = term.getText().toString();
+            //Gathering the price value
+            String price = findViewById(R.id.editText1).toString();
+            //Gathering the down payment value
+            String downPayment = findViewById(R.id.editText2).toString();
+            //Entering the gathered data into the intent
+            intent.putExtra("Price", price);
+            intent.putExtra("DownPayment", downPayment);
+            intent.putExtra("LoanTerm", termLength);
+            //Start loan activity
+            startActivity(intent);
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }
 
-    private void StartActivityForResult(){
-        try {
-            Intent intent = new Intent(this, LoanSummaryActivity.class);
-            intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-            Integer radioId = loanTermRG.getCheckedRadioButtonId();
-            RadioButton term = (RadioButton) findViewById(radioId);
-            String termLength = term.getText().toString();
-            String price = findViewById(R.id.editText1).toString();
-            String downPayment = findViewById(R.id.editText2).toString();
-            intent.putExtra("Price", price);
-            intent.putExtra("DownPayment", downPayment);
-            intent.putExtra("LoanTerm", termLength);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
     private void onActivityResult(){
         try{
+            //Defining the intent
             Intent intent = getIntent();
+            //Assigning the passed over values to variables
             String totalCost = intent.getStringExtra("totalCost");
             String borrowedAmount = intent.getStringExtra("borrowedAmount");
             String interestAmount = intent.getStringExtra("interestAmount");
+            //Variables for the textviews
             TextView TotalCost = (TextView) findViewById(R.id.tvTotalCost);
             TextView BorrowedAmount = (TextView) findViewById(R.id.tvBorrowedAmount);
             TextView InterestAmount = (TextView) findViewById(R.id.tvInterestAmount);
+            //Tried to ensure a null exception was not thrown
             if(totalCost == null || borrowedAmount == null || interestAmount == null){
+                //Should be blank
                 TotalCost.setText("");
                 BorrowedAmount.setText("");
-               InterestAmount.setText("");
+                InterestAmount.setText("");
             }
             else {
+                //Outputting the values to the textviews
                 TotalCost.setText(totalCost);
                 BorrowedAmount.setText(borrowedAmount);
                 InterestAmount.setText(interestAmount);
@@ -74,28 +82,20 @@ public class PurchaseActivity extends Activity {
             e.printStackTrace();
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        try{
-            // Inflate the menu;
-            getMenuInflater().inflate(R.menu.my, menu);
-            return true;
+
+    //On click for button
+    public void activateLoanSummary(View view) {
+        try {
+            //Method to send data to LoanSummaryActivity.java
+            StartActivityForResult();
+            setContentView(R.layout.loansummary_layout);
+            //Method to output data recieved from LoanSummaryActivity.java
+            onActivityResult();
         }
         catch(Exception e){
             e.printStackTrace();
-            return false;
         }
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
