@@ -25,14 +25,17 @@ public class PurchaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         //Setting the view to purchase_layout.xml
         setContentView(R.layout.purchase_layout);
+        //Method to output data recieved from LoanSummaryActivity.java
+        onActivityResult();
     }
 
     private void StartActivityForResult(){
         try {
             //Defining the new intent
             Intent intent = new Intent(this, LoanSummaryActivity.class);
-            //intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            intent.setAction(Intent.ACTION_SEND_MULTIPLE);
             //Gathering the value of the selected radio button
+            RadioGroup loanTermRG = (RadioGroup) findViewById(R.id.radioGroup1);
             Integer radioId = loanTermRG.getCheckedRadioButtonId();
             RadioButton term = (RadioButton) findViewById(radioId);
             String termLength = term.getText().toString();
@@ -89,8 +92,6 @@ public class PurchaseActivity extends Activity {
             //Method to send data to LoanSummaryActivity.java
             StartActivityForResult();
             setContentView(R.layout.loansummary_layout);
-            //Method to output data recieved from LoanSummaryActivity.java
-            onActivityResult();
         }
         catch(Exception e){
             e.printStackTrace();
