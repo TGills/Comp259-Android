@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#98efff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="From City:"
+            android:id="@+id/lblFromCity"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvFromCity"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:text="Large Text"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="To City: "
+            android:id="@+id/lblToCity"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/tvToCity"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Distance"
+            android:id="@+id/lblDistance"
+            android:layout_row="2"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/tvDistance"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Ticket Price: "
+            android:id="@+id/lblTicketPrice"
+            android:layout_row="3"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/tvTicketPrice"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Bonus Miles:"
+            android:id="@+id/lblBonusMiles"
+            android:layout_row="4"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/tvBonusMiles"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:singleLine="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:text="Back"
+            android:id="@+id/btnBack"
+            android:layout_row="19"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:onClick="back"/>
+    </GridLayout>
+</LinearLayout>
