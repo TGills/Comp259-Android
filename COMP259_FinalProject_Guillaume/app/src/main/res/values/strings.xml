@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">COMP259_FinalProject_Guillaume</string>
+    <string name="my_contacts" />
+    <string name="enter" />
+    <string name="name" />
+    <string name="details" />
+    <string name="address" />
+    <string name="phone_number" />
+    <string name="Add" />
+</resources>

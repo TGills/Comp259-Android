@@ -1,0 +1,141 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cornez.COMP259_FinalProject_Guillaume.MainActivity">
+
+    <TabHost
+        android:id="@+id/tabHost"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tab_color"
+                android:showDividers="beginning|middle|end"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <RelativeLayout
+                    android:id="@+id/tabList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_pets"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="60dp"
+                        android:background="@color/dark_blue"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/pale_blue"
+                        android:textSize="55sp" />
+
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textView1"
+                        android:background="@android:color/white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tabInfo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enter"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="60dp"
+                        android:background="#ff49546e"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/pale_blue"
+                        android:textSize="55sp" />
+
+                    <ImageView
+                        android:id="@+id/memberPhoto"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_below="@+id/textView2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/none"
+                        android:contentDescription="@string/photo" />
+
+                    <EditText
+                        android:id="@+id/memberName"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:hint="@string/name"
+                        android:inputType="textCapWords"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:id="@+id/memberDetail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+
+                        android:layout_below="@+id/memberName"
+                        android:hint="@string/details"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:id="@+id/memberPhoneNumber"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/memberDetail"
+                        android:hint="@string/phone_number"
+                        android:inputType="phone"
+                        android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/addBTN"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/memberPhoneNumber"
+                        android:layout_centerHorizontal="true"
+                        android:enabled="false"
+                        android:text="@string/add_btn"
+                        android:textSize="25sp" />
+
+                </RelativeLayout>
+
+
+
+            </FrameLayout>
+
+        </RelativeLayout>
+    </TabHost>
+
+</RelativeLayout>
+

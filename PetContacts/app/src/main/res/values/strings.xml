@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pet Contacts</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="my_pets">Pet Listing</string>
+    <string name="name">Name</string>
+    <string name="details">Pet Details</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="add_btn">Add Pet Contact</string>
+    <string name="enter">Pet Contact</string>
+    <string name="photo">photo of pet</string>
+
+</resources>
