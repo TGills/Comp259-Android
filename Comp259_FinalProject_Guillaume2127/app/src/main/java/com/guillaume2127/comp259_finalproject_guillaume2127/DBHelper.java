@@ -92,29 +92,46 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public int updateContact(Contact Contact){
         SQLiteDatabase db = getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, Contact.getName());
         values.put(KEY_ADDRESS, Contact.getAddress());
         values.put(KEY_EMAIL, Contact.getEmail());
         values.put(KEY_PHONE, Contact.getPhoneNumber());
         values.put(KEY_IMAGEURI, Contact.getImageURL().toString());
-
         int rowsAffected = db.update(TABLE_NAME, values, KEY_ID + "=?", new String[] {String.valueOf(Contact.getID())});
         db.close();
-
         return rowsAffected;
     }
     public List<Contact> getAllContacts(){
         List<Contact> allContacts = new ArrayList<Contact>();
 
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         if(cursor.moveToFirst()){
-
             do{
-                allContacts.add(new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Uri.parse(cursor.getString(5))));
+                allContacts.add(new Contact(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        Uri.parse(cursor.getString(5))));
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return allContacts;
+    }
+    public List<Contact> getAContact(Integer id){
+        List<Contact> allContacts = new ArrayList<Contact>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_ADDRESS, KEY_EMAIL, KEY_PHONE, KEY_IMAGEURI}, KEY_ID + "=?", new String[]{String.valueOf(id)},null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                allContacts.add(new Contact(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        Uri.parse(cursor.getString(5))));
             }
             while(cursor.moveToNext());
         }

@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 
     TabHost tabHost;
     int contactIndex;
+    int currentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,12 @@ public class MainActivity extends Activity {
                     public boolean onItemLongClick(AdapterView<?> parent,
                                                    View view, int position, long id) {
                         contactIndex = position;
+                        //get currentContact ID
+                        Contact currentContact = (Contact) view.getTag();
+                        currentID = currentContact.getID();
+
+
+
                         return false;
                     }
                 });
@@ -181,8 +188,8 @@ public class MainActivity extends Activity {
     //Delete Contact
     public boolean onContextItemSelected(MenuItem item) {
             if (item.getTitle() == "Delete Contact") {
-                dbHelper.deleteContact(ContactArrayList.get(contactIndex));
-                ContactArrayList.remove(contactIndex);
+                dbHelper.deleteContact(ContactArrayList.get(currentID));
+                ContactArrayList.remove(currentID);
                 arrayAdapter.notifyDataSetChanged();
             }
             else if (item.getTitle() == "Edit Contact") {
@@ -190,8 +197,11 @@ public class MainActivity extends Activity {
             }
             else if(item.getTitle() == "Contact Details"){
                 Intent i = new Intent(this, contact_details.class);
-                String selectedFromList = String.valueOf(ContactListView.getItemAtPosition(position));
-                i.puExtra("ID", selectedFromList);
+                i.setAction(Intent.ACTION_SEND_MULTIPLE);
+                int position = 0;
+                String selectedFromList = String.valueOf(currentID);
+                Log.d("ID: ", selectedFromList);
+                i.putExtra("ID", selectedFromList);
                 startActivity(i);
                 setContentView(R.layout.contact_details);
             }
@@ -205,7 +215,7 @@ public class MainActivity extends Activity {
         String first = member.getPhoneNumber();
         int contactCount = ContactArrayList.size();
         Log.d("contactCount: ", String.valueOf(contactCount));
-        for (int i = 0; i <= (contactCount -1); i++) {                                              //IMPORTANT
+        for (int i = 0; i <= (contactCount - 1); i++) {                                              //IMPORTANT
             if (first.compareToIgnoreCase(ContactArrayList.get(i).getPhoneNumber()) == 0)
                 return true;
         }
@@ -226,6 +236,25 @@ public class MainActivity extends Activity {
         arrayAdapter = new ContactListAdapter();
         ContactListView.setAdapter(arrayAdapter);
     }
+    //Updating a contact
+    public void contactUpdate(View view) {
+        EditText updateName = (EditText) findViewById(R.id.etName);
+        EditText updateAddress = (EditText) findViewById(R.id.etAddress);
+        EditText updateEmail = (EditText) findViewById(R.id.etEmail);
+        EditText updatePhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
+
+        Contact contact = new Contact(
+                dbHelper.getContactsCount(), //ID
+                String.valueOf(updateName.getText().toString()), //Name
+                String.valueOf(updateAddress.getText().toString()), //Address
+                String.valueOf(updateEmail.getText().toString()), //Email
+                String.valueOf(updatePhoneNumber.getText().toString()), //Phone
+                defaultImage);
+
+        dbHelper.updateContact(contact);
+        setContentView(R.layout.activity_main);
+    }
+
     private class ContactListAdapter extends ArrayAdapter<Contact> {
         public ContactListAdapter() {
             super(getApplicationContext(),
@@ -237,8 +266,6 @@ public class MainActivity extends Activity {
                 view = getLayoutInflater().inflate(R.layout.listview_item, parent, false);
 
             Contact currentContact = ContactArrayList.get(position);
-            listViewID = (TextView)
-                    view.findViewById(R.id.textViewID);
             listViewName = (TextView)
                     view.findViewById(R.id.textViewName);
             listViewAddress = (TextView)
@@ -251,10 +278,12 @@ public class MainActivity extends Activity {
                     view.findViewById(R.id.memberPhoto);
             //listViewID.setText(currentContact.getID());
             listViewName.setText(currentContact.getName());
-            //listViewAddress.setText(currentContact.getAddress());
-            //listViewEmail.setText(currentContact.getEmail());
-            //listViewPhone.setText(currentContact.getPhoneNumber());
+            listViewAddress.setText(currentContact.getAddress());
+            listViewEmail.setText(currentContact.getEmail());
+            listViewPhone.setText(currentContact.getPhoneNumber());
             listViewPhoto.setImageURI(Uri.parse(String.valueOf(currentContact.getImageURL())));
+
+            view.setTag(currentContact);
 
             return view;
         }

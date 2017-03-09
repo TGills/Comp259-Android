@@ -42,5 +42,6 @@
         android:layout_height="wrap_content"
         android:text="Confirm Update"
         android:id="@+id/btnUpdate"
+        android:onClick="contactUpdate"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
